@@ -1,0 +1,115 @@
+package com.mygdx.ZombieHouse;	
+
+import com.badlogic.gdx.Game; 
+import com.badlogic.gdx.Gdx; 
+import com.badlogic.gdx.Input.Keys; 
+import com.badlogic.gdx.InputProcessor; 
+import com.badlogic.gdx.graphics.GL20; 
+import com.badlogic.gdx.graphics.Texture; 
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch; 
+import com.badlogic.gdx.graphics.g2d.TextureRegion; 
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+
+public class mainZombieHouse extends Game{
+	class MouseActor extends Actor {
+        private TextureRegion region;
+
+        public MouseActor() {
+            region = new TextureRegion(new Texture("badlogic.jpg"));
+            setSize(100, 50);
+            setPosition(100, 50);
+        }
+
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
+            batch.setColor(getColor());
+            batch.draw(region, getX(), getY(), getWidth(), getHeight());
+        }
+    }
+
+    class KeysActor extends Actor {
+        private TextureRegion region;
+
+        public KeysActor() {
+            region = new TextureRegion(new Texture("quads.png"));
+            setSize(100, 50);
+            setPosition(300, 50);
+        }
+
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
+            batch.setColor(getColor());
+            batch.draw(region, getX(), getY(), getWidth(), getHeight());
+        }
+    }
+    
+    class MouseActorListener extends InputListener {
+        // коснулись актера
+        @Override
+        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+            event.getListenerActor().setSize(200, 100); // когда коснулись - увеличили его
+            return true; // обязательно возвращаем true - чтобы был вызван потом метод touchUp()
+        }
+
+        // отпустили мышку или подняли палец с актера
+        @Override
+        public void touchUp(InputEvent event, float x, float y, int pointer,
+                int button) {
+            event.getListenerActor().setSize(100, 50); // уменьшили актера обратно
+        }
+    }
+    
+    class KeysListener extends InputListener {
+        @Override
+        public boolean keyDown(InputEvent event, int keycode) {
+            float x = event.getListenerActor().getX();
+            float y = event.getListenerActor().getY();
+
+            switch(keycode) {
+            case Keys.LEFT:
+                x -= 5;
+                break;
+            case Keys.RIGHT:
+                x += 5;
+                break;
+            case Keys.UP:
+                y += 5;
+                break;
+            case Keys.DOWN:
+                y -= 5;
+                break;
+            }
+            event.getListenerActor().setPosition(x, y);
+            return true;
+        }
+    }
+    
+    Stage stage;
+    SpriteBatch batch;
+    
+    public void create(){
+    	batch=new SpriteBatch();
+    	MouseActor ma=new MouseActor();
+    	ma.addListener(new MouseActorListener());
+    	KeysActor ka =new KeysActor();
+    	ka.addListener(new KeysListener());
+    	stage=new Stage(new StretchViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight()),batch);
+    	Gdx.input.setInputProcessor(stage);
+    	stage.addActor(ma);
+    	stage.addActor(ka);
+    	stage.setKeyboardFocus(ka);
+    	stage.draw();
+    	//stage.act();
+    }
+    
+    public void render(){
+    	Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    	stage.draw();
+    	//stage.act();
+    }
+}

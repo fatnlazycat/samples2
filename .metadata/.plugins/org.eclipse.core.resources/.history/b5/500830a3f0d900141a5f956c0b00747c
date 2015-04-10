@@ -1,0 +1,135 @@
+package com.mygdx.Zombies;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+
+public class ScreenBushes implements Screen {
+	public ScreenBushes(SpriteBatch batch){
+		this.batch=batch;
+		stage=new Stage(new StretchViewport(800,480),batch);
+		
+		backgr=new Actor(){//фон кустов
+			public void draw(Batch batch, float parentAlpha){
+				batch.draw(new TextureRegion(new Texture("6.jpg")), 0, 0);
+			}
+		};
+		stage.addActor(backgr);
+		
+		key=new Actor(){//ключик
+			public void draw(Batch batch, float parentAlpha){
+				if (status==0) batch.draw(new TextureRegion(new Texture("df.png")), 0, 0);
+			}
+		};
+		key.setSize(800, 480);
+		key.setPosition(0, 0);
+		key.addListener(new InputListener(){
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+				boolean inRange=(x>210&&x<290)&&(y>220&&y<270);
+				if (inRange) pickKey(x, y);
+				return true;
+			}
+		});
+		stage.addActor(key);
+		
+		oknoDlyaInventarja=new Actor(){
+			public void draw(Batch batch, float parentAlpha){
+				if (status==1) {
+					batch.draw(new TextureRegion(new Texture("OKNO dlja inventarja.png")), 0, 0);
+					batch.draw(new TextureRegion(new Texture("key.png")), 0, 0);
+				}
+			}			
+		};
+		oknoDlyaInventarja.setSize(800, 480);
+		oknoDlyaInventarja.setPosition(0, 0);
+		oknoDlyaInventarja.addListener(new InputListener(){
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+				status=2;
+				return true;
+			}
+		});
+		stage.addActor(oknoDlyaInventarja);
+		
+		bb=new BackButton();
+		stage.addActor(bb);
+		
+		stage.addListener(new InputListener(){
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+				boolean inRange=(x>210&&x<290)&&(y>220&&y<270);
+				if (inRange) pickKey(x, y);
+				return true;
+			}
+		});
+		
+		//Gdx.input.setInputProcessor(stage);
+	}
+
+	SpriteBatch batch;
+	Stage stage;
+	Actor backgr, key, oknoDlyaInventarja;
+	BackButton bb;
+	int status;
+	
+	@Override
+	public void show() {
+		Gdx.input.setInputProcessor(stage);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		stage.draw();
+
+	}
+
+	@Override
+	public void render(float delta) {
+		stage.draw();
+
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+
+	}
+	
+	public void pickKey(float x, float y){
+		if (status==0){
+			status=1;
+			
+		}
+		
+		
+	}
+
+}

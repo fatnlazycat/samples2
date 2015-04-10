@@ -1,0 +1,78 @@
+package com.mygdx.ZombieHouse;
+
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+
+public class mainZombieHouse extends Game implements ApplicationListener {
+
+	Button gameButton, secondButton;
+	MenuScreen mScreen;
+	SpriteBatch batch;
+	Stage st;
+	TextureRegion myRegion;
+	float X,Y;
+	
+	private mainZombieHouse(){}
+	
+	private static final mainZombieHouse instance=new mainZombieHouse();
+	
+	public static mainZombieHouse getInstance(){
+		return instance;
+	}
+	
+	class Button extends Actor{
+		public void draw(Batch batch,float parentAppha){
+			batch.draw(myRegion, X, Y, 100, 100);
+		}
+	}
+	
+	class MenuScreen implements Screen{
+		
+		class gotoListener extends ClickListener{
+			public void clicked(InputEvent event, float x, float y) {
+				myRegion=new TextureRegion(new Texture("badlogic.jpg"));
+				X=200;
+				Y=200;
+				secondButton=new Button();
+				st.addActor(secondButton);
+				st.draw();
+			}	
+		}
+		
+		public void pause(){}
+		public void resume(){}
+		public void dispose(){}
+		public void resize(int x, int y){}
+		public void hide(){}
+		public void render(float delta){
+			st.draw();
+		}
+		public void show(){
+			st.draw();
+			Gdx.input.setInputProcessor(st);
+		}
+	}
+	
+	public void create(){
+		myRegion=new TextureRegion(new Texture("quads.png"));
+		X=100;
+		Y=100;
+		gameButton=new Button();
+		mScreen=new MenuScreen();
+		batch=new SpriteBatch();
+		st=new Stage(new StretchViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight()),batch);
+		st.addActor(gameButton);
+		setScreen(mScreen);
+	}
+}

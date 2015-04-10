@@ -1,0 +1,11 @@
+package com.mygdx.ZombieHouse;
+
+import com.badlogic.gdx.scenes.scene2d.Actor;
+
+class InvisibleActor extends Actor{
+	private InvisibleActor(){}
+	
+	public InvisibleActor(int Width, int Height){
+		
+	}
+}

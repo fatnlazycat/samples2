@@ -1,0 +1,100 @@
+package com.example.qrit;
+
+import android.support.v7.app.ActionBarActivity;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.*;
+import android.app.AlertDialog;
+import android.content.*;
+import android.graphics.drawable.Drawable;
+import android.widget.*;
+
+
+public class MainActivity extends ActionBarActivity {
+
+	TextView textView_result;
+	EditText editText_Encode;
+	final ActionBarActivity thisActivity=MainActivity.this;
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        textView_result=(TextView) findViewById(R.id.textView_result);
+		textView_result.setText("This app uses QR Droid (http://qrdroid.com/) as a scanning engine."
+				+ "QR Droid is free for downloading & distribution."
+				+ "If you haven't got one istalled on your device,"
+				+ "you'll be able to do this after tapping the Scan button");
+		editText_Encode=(EditText) findViewById(R.id.editText_Encode);
+		/*Drawable d=getResources().getDrawable(R.drawable.m9);
+        getActionBar().setBackgroundDrawable(d);*/
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    
+    public void startScan(View view){
+    	
+    	Intent qrDroid=new Intent("la.droid.qr.scan");
+    	try{
+    		startActivityForResult(qrDroid,0);
+    	}
+    	catch(ActivityNotFoundException e){
+    		//startActivity(new Intent(thisActivity,QrDroidRequired.class));
+    		AlertDialog.Builder builder=new AlertDialog.Builder(thisActivity);
+    		builder.setMessage(thisActivity.getString(R.string.qrdroidMissing))
+    		.setCancelable(true)
+    		.setNegativeButton(thisActivity.getString(R.string.cancel), new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {dialog.cancel();}
+				})
+			.setPositiveButton(thisActivity.getString(R.string.getFromMarket), new DialogInterface.OnClickListener(){
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						thisActivity.startActivity(new Intent(Intent.ACTION_VIEW,
+								Uri.parse("https://market.android.com/details?id=la.droid.qr")));
+					}
+			});
+    		builder.create().show();
+    		//or https://market.android.com/details?id=la.droid.qrdroid.la/apk/qr/
+    		
+    		
+    	}
+    }
+    
+    public void startEncoding(View view){
+    	String code=editText_Encode.getText().toString();
+    	if (code.trim().length()==0) {
+    		Toast.makeText(thisActivity, R.string.noText, Toast.LENGTH_SHORT).show();
+    		return;
+    	}
+    	Intent qrDroid=new Intent("la.droid.qr.encode");
+    	qrDroid.putExtra("la.droid.qr.code", code);
+    	qrDroid.putExtra("la.droid.qr.image", true);
+    }
+    
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    	super.onActivityResult(requestCode, resultCode, data);
+    	if (data!=null && data.getExtras()!=null){
+    		String result=data.getExtras().getString("la.droid.qr.result");
+    		textView_result.setText(result);
+    	}
+    }
+}
