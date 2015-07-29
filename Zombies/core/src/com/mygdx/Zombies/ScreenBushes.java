@@ -72,6 +72,7 @@ public class ScreenBushes implements Screen {
 				//предмет уже выбран, надо его использовать
 				if (Zombies.getInstance().racksack.itemSelected){
 					Zombies.getInstance().racksack.itemSelected=false;
+					showRacksack=false;
 					return true;
 				}
 				
@@ -94,13 +95,14 @@ public class ScreenBushes implements Screen {
 				}
 				
 				//берём предмет из рюкзака
-				if (showRacksack&&(y>10&&y<100)){
-					int index=(int) ((x-160)/80);
+				if (showRacksack&&(y>10&&y<100&&x>115)){
+					int index=(int) ((x-115)/85);
 					if (index>=0&&index<Zombies.getInstance().racksack.content.length){
 						boolean gotTheRightCell=!(Zombies.getInstance().racksack.content[index]==null);
 						if (gotTheRightCell){
 							Zombies.getInstance().racksack.currentItem=Zombies.getInstance().racksack.content[index];
 							Zombies.getInstance().racksack.itemSelected=true;
+							Zombies.getInstance().slotToDraw=Zombies.getInstance().oneSlot;
 						}
 					}
 				}

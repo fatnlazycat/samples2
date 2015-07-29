@@ -22,11 +22,11 @@ public class Racksack extends Actor {
 	}
 	
 	public void draw(Batch batch, float parentAlpha){
-		if (itemSelected) batch.draw(currentItem, 10, 10);
+		if (itemSelected) batch.draw(currentItem, 10, 10, 85, 85);
 		else{
 			int numberOfItems=this.next();
 			for (int i=0; i<numberOfItems; i++){
-				batch.draw(content[i], 120+80*i, 10);
+				batch.draw(content[i], 120+80*i, 10, 85, 85);
 			}
 		}
 	}

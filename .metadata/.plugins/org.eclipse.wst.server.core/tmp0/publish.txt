@@ -1,0 +1,4 @@
+#GlassFish 3
+#Thu Jun 18 08:27:52 EEST 2015
+org.eclipse.jst.jee.server\:FirstServlet=C\:\\glassfish4\\glassfish\\domains\\domain1\\eclipseApps\\FirstServlet
+org.eclipse.jst.jee.server\:FirstServletProject=C\:\\glassfish4\\glassfish\\domains\\domain1\\eclipseApps\\FirstServletProject

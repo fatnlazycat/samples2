@@ -66,13 +66,14 @@ public class ScreenMailbox implements Screen {
 				//предмет уже выбран, надо его использовать
 				if (Zombies.getInstance().racksack.itemSelected){
 					Zombies.getInstance().racksack.itemSelected=false;
+					showRacksack=false;
 					return true;
 				}
 				
 				//тык на ящик
-				boolean inRange=(x>210&&x<290)&&(y>220&&y<270);
+				boolean inRange=(x>193&&x<514)&&(y>220&&y<460);
 				if (status==2) status=3;
-				if (status==0&&inRange) pick();
+				if (((status==0)||(status==1))&&inRange) pick();
 				
 				//слот
 				boolean toSlot=(x>10&&x<100)&&(y>10&&y<100);
@@ -88,13 +89,14 @@ public class ScreenMailbox implements Screen {
 				}
 				
 				//берём предмет из рюкзака
-				if (showRacksack&&(y>10&&y<100)){
-					int index=(int) ((x-160)/80);
+				if (showRacksack&&(y>10&&y<100&&x>115)){
+					int index=(int) ((x-115)/85);
 					if (index>=0&&index<Zombies.getInstance().racksack.content.length){
 						boolean gotTheRightCell=!(Zombies.getInstance().racksack.content[index]==null);
 						if (gotTheRightCell){
 							Zombies.getInstance().racksack.currentItem=Zombies.getInstance().racksack.content[index];
 							Zombies.getInstance().racksack.itemSelected=true;
+							Zombies.getInstance().slotToDraw=Zombies.getInstance().oneSlot;
 						}
 					}
 				}
@@ -157,9 +159,11 @@ public class ScreenMailbox implements Screen {
 	}
 	
 	public void pick(){
-		status=2;
-		TextureRegion smallLetter=new TextureRegion(new Texture("3.png"),210,210,80,80);
-		Zombies.getInstance().racksack.content[Zombies.getInstance().racksack.next()]=smallLetter;
+		if (status==1){
+			TextureRegion smallLetter=new TextureRegion(new Texture("3.png"),250,85,100,130);
+			Zombies.getInstance().racksack.content[Zombies.getInstance().racksack.next()]=smallLetter;
+		}
+		status++;
 	}
 	
 }

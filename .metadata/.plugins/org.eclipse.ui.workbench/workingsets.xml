@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workingSetManager>
 <workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1426793112771_2" label="ZombieHouse" name="ZombieHouse">
-<item elementID="=ZombieHouse" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/ZombieHouse" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/ZombieHouse-android" type="4"/>
-<item elementID="=ZombieHouse-core" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/ZombieHouse-core" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/ZombieHouse-html" type="4"/>
-<item elementID="=ZombieHouse-desktop" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/ZombieHouse-desktop" type="4"/>
 </workingSet>
 <workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1427226005550_3" label="Zombies" name="Zombies">
-<item elementID="=Zombies-core" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=Zombies-html" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=Zombies" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=Zombies-android" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=Zombies-desktop" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/Zombies-core" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/Zombies-html" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/Zombies" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/Zombies-android" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/Zombies-desktop" type="4"/>
 </workingSet>
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1406344389175_0" label="Window Working Set" name="Aggregate for window 1406344389175"/>
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1406388850123_1" label="Window Working Set" name="Aggregate for window 1406388850123"/>

@@ -32,7 +32,7 @@ public class Screen1 implements Screen {
 		};
 		stage.addActor(backgr);
 		
-		toBush=new InvisibleActor(64,64,500,200);
+		toBush=new InvisibleActor(64,64,420,140);
 		toBush.addListener(new InputListener(){
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
 				Zombies.getInstance().gotoBushes();
@@ -41,7 +41,7 @@ public class Screen1 implements Screen {
 		});
 		stage.addActor(toBush);
 		
-		toMailbox=new InvisibleActor(64,64,100,250);
+		toMailbox=new InvisibleActor(45,45,145,335);
 		toMailbox.addListener(new InputListener(){
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
 				Zombies.getInstance().gotoMailbox();
@@ -52,6 +52,15 @@ public class Screen1 implements Screen {
 		
 		stage.addListener(new InputListener(){
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+				
+				//предмет уже выбран, надо его использовать
+				if (Zombies.getInstance().racksack.itemSelected){
+					Zombies.getInstance().racksack.itemSelected=false;
+					showRacksack=false;
+					return true;
+				}
+				
+				//слот
 				boolean toSlot=(x>10&&x<100)&&(y>10&&y<100);
 				if (toSlot){
 					if (Zombies.getInstance().slotToDraw==Zombies.getInstance().oneSlot){ 
@@ -63,6 +72,19 @@ public class Screen1 implements Screen {
 						showRacksack=false;
 					}
 				}
+				
+				//берём предмет из рюкзака
+				if (showRacksack&&(y>10&&y<100&&x>115)){
+					int index=(int) ((x-115)/85);
+					if (index>=0&&index<Zombies.getInstance().racksack.content.length){
+						boolean gotTheRightCell=!(Zombies.getInstance().racksack.content[index]==null);
+						if (gotTheRightCell){
+							Zombies.getInstance().racksack.currentItem=Zombies.getInstance().racksack.content[index];
+							Zombies.getInstance().racksack.itemSelected=true;
+							Zombies.getInstance().slotToDraw=Zombies.getInstance().oneSlot;
+						}
+					}
+				}				
 				return true;
 			}
 		});

@@ -14,10 +14,10 @@ class InvisibleActor extends Actor{
 	public InvisibleActor(int width, int height, int Xposition, int Yposition){
 		setSize(width, height);
 		setPosition(Xposition, Yposition);
-		region=new TextureRegion(new Texture("empty.png"));
+		//region=new TextureRegion(new Texture("empty.png"));
 	}
 	
 	public void draw(Batch batch, float parentAlpha){
-		batch.draw(region, getX(), getY());
+		//batch.draw(region, getX(), getY());
 	}
 }
