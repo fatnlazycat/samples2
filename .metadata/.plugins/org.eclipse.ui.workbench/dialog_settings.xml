@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="WorkbenchPreferenceDialogSettings">
-		<item value="4" key="DIALOG_X_ORIGIN"/>
-		<item value="30" key="DIALOG_Y_ORIGIN"/>
+		<item value="68" key="DIALOG_X_ORIGIN"/>
+		<item value="-48" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="org.eclipse.ui.internal.QuickAccess">
 		<item value="525" key="dialogHeight"/>
@@ -33,9 +33,10 @@
 		<item value="-85" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="ImportExportAction">
-		<item value="org.springsource.ide.eclipse.gradle.wizards.import" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>
+		<item value="org.jboss.tools.openshift.express.ui.importExistingApplicationWizard" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>
 		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
 			<item value="org.springsource.ide.eclipse.gradle.wizards.import.category"/>
+			<item value="org.jboss.tools.openshift.express.ui.wizard.importCategory"/>
 		</list>
 	</section>
 </section>
